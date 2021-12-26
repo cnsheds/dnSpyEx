@@ -67,6 +67,7 @@ namespace dnSpy.Contracts.Decompiler {
 			if (string2.IsNullOrEmpty(id))
 				return EMPTY_NAME;
 
+			id = DemangledCPlusPlusName(id);
 			// Common case is a valid string
 			int i = 0;
 			if (id.Length <= maxLength) {
@@ -101,6 +102,20 @@ namespace dnSpy.Contracts.Decompiler {
 			}
 
 			return sb.ToString();
+		}
+
+		/// <summary>
+		/// C++模板显示为更适合人阅读的样式
+		/// </summary>
+		/// <param name="stdname"></param>
+		/// <returns></returns>
+		public static string DemangledCPlusPlusName(string stdname) {
+			string DemangledName = stdname;
+			DemangledName = DemangledName.Replace("basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> >", "wstring");
+			DemangledName = DemangledName.Replace("basic_string<char,std::char_traits<char>,std::allocator<char> >", "string");
+			DemangledName = DemangledName.Replace("CStringT<wchar_t,StrTraitMFC_DLL<wchar_t,ATL::ChTraitsCRT<wchar_t> > >", "CStringW");
+			DemangledName = DemangledName.Replace("CStringT<char,StrTraitMFC_DLL<char,ATL::ChTraitsCRT<char> > >", "CString");
+			return DemangledName;
 		}
 
 		static bool IsValidChar(char c, bool allowSpaces) {
