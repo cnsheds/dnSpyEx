@@ -81,6 +81,10 @@ namespace dnSpy.Documents.Tabs {
 			if (!documentTabServiceSettings.DecompileFullType || @ref2 is null || def is null)
 				return @ref2 ?? @ref;
 
+			// 如果是 <Module> 下的Token, 不再往上递归
+			if (def.DeclaringType.Name == "<Module>")
+				return def;
+
 			const int MAX = 100;
 			for (int i = 0; i < MAX && def.DeclaringType is not null; i++)
 				def = def.DeclaringType;
