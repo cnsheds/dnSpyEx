@@ -156,7 +156,6 @@ namespace dnSpy.Search {
 					asmNode.TreeNode.EnsureChildrenLoaded();
 				}));
 			}
-			var modChildren = asmNode.TreeNode.DataChildren.OfType<ModuleDocumentNode>().ToArray();
 
 			foreach (var node in asmNode.TreeNode.DataChildren) {
 				options.CancellationToken.ThrowIfCancellationRequested();
@@ -502,10 +501,16 @@ namespace dnSpy.Search {
 		}
 
 		bool CheckMatch(MethodDef method) {
-			if (IsMatch(method.Name, method))
+			var fullName = method.FullName;
+			if (IsMatch(IdentifierEscaper.Escape(fullName, true), method) ||
+				IsMatch(fullName, method))
 				return true;
-			if (IsMatch(FixTypeName(method.DeclaringType.FullName) + "." + method.Name.String, method) ||
-				IsMatch(FixTypeName(method.DeclaringType.FullName) + "::" + method.Name.String, method))
+			if (IsMatch(IdentifierEscaper.Escape(method.Name), method) ||
+				IsMatch(method.Name, method))
+				return true;
+			var declTypeFullName = method.DeclaringType.FullName;
+			if (IsMatch(FixTypeName(declTypeFullName) + "." + method.Name.String, method) ||
+				IsMatch(FixTypeName(declTypeFullName) + "::" + method.Name.String, method))
 				return true;
 
 			if (method.ImplMap is ImplMap im) {
@@ -642,10 +647,16 @@ namespace dnSpy.Search {
 		}
 
 		bool CheckMatch(FieldDef field) {
-			if (IsMatch(field.Name, field))
+			var fieldFullName = field.FullName;
+			if (IsMatch(IdentifierEscaper.Escape(fieldFullName, true), field) ||
+				IsMatch(fieldFullName, field))
 				return true;
-			if (IsMatch(FixTypeName(field.DeclaringType.FullName) + "." + field.Name.String, field) ||
-				IsMatch(FixTypeName(field.DeclaringType.FullName) + "::" + field.Name.String, field))
+			if (IsMatch(IdentifierEscaper.Escape(field.Name), field) ||
+				IsMatch(field.Name, field))
+				return true;
+			var declTypeFullName = field.DeclaringType.FullName;
+			if (IsMatch(FixTypeName(declTypeFullName) + "." + field.Name.String, field) ||
+				IsMatch(FixTypeName(declTypeFullName) + "::" + field.Name.String, field))
 				return true;
 
 			if (field.ImplMap is ImplMap im) {
@@ -676,10 +687,16 @@ namespace dnSpy.Search {
 		}
 
 		bool CheckMatch(PropertyDef prop) {
-			if (IsMatch(prop.Name, prop))
+			var fullName = prop.FullName;
+			if (IsMatch(IdentifierEscaper.Escape(fullName, true), prop) ||
+				IsMatch(fullName, prop))
 				return true;
-			if (IsMatch(FixTypeName(prop.DeclaringType.FullName) + "." + prop.Name.String, prop) ||
-				IsMatch(FixTypeName(prop.DeclaringType.FullName) + "::" + prop.Name.String, prop))
+			if (IsMatch(IdentifierEscaper.Escape(prop.Name), prop) ||
+				IsMatch(prop.Name, prop))
+				return true;
+			var declTypeFullName = prop.DeclaringType.FullName;
+			if (IsMatch(FixTypeName(declTypeFullName) + "." + prop.Name.String, prop) ||
+				IsMatch(FixTypeName(declTypeFullName) + "::" + prop.Name.String, prop))
 				return true;
 
 			return false;
@@ -705,10 +722,16 @@ namespace dnSpy.Search {
 		}
 
 		bool CheckMatch(EventDef evt) {
-			if (IsMatch(evt.Name, evt))
+			var eventFullName = evt.FullName;
+			if (IsMatch(IdentifierEscaper.Escape(eventFullName, true), evt) ||
+				IsMatch(eventFullName, evt))
 				return true;
-			if (IsMatch(FixTypeName(evt.DeclaringType.FullName) + "." + evt.Name.String, evt) ||
-				IsMatch(FixTypeName(evt.DeclaringType.FullName) + "::" + evt.Name.String, evt))
+			if (IsMatch(IdentifierEscaper.Escape(evt.Name), evt) ||
+				IsMatch(evt.Name, evt))
+				return true;
+			var declTypeFullName = evt.DeclaringType.FullName;
+			if (IsMatch(FixTypeName(declTypeFullName) + "." + evt.Name.String, evt) ||
+				IsMatch(FixTypeName(declTypeFullName) + "::" + evt.Name.String, evt))
 				return true;
 
 			return false;
