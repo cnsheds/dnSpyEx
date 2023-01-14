@@ -309,6 +309,9 @@
   <data name="DetachAllCommand" xml:space="preserve">
     <value>Detach A_ll</value>
   </data>
+  <data name="DetachingWillCauseTerminationOfDebuggeeProcess" xml:space="preserve">
+    <value>Detaching will cause termination of the debuggee process. Do you wish to continue?</value>
+  </data>
   <data name="DisableAllBreakpointsCommand" xml:space="preserve">
     <value>Disable All Breakpoi_nts</value>
   </data>
@@ -725,6 +728,12 @@ Are you sure you want to expand it?</value>
   </data>
   <data name="Window_Threads" xml:space="preserve">
     <value>Threads</value>
+  </data>
+  <data name="Window_StaticFields" xml:space="preserve">
+    <value>Static Fields</value>
+  </data>
+  <data name="StaticFieldsCommand" xml:space="preserve">
+    <value>_Static Fields</value>
   </data>
   <data name="YesNo_No" xml:space="preserve">
     <value>No</value>
