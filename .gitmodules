@@ -1,6 +1,7 @@
 [submodule "Plugins/ILSpy.Decompiler/NRefactory"]
 	path = Extensions/ILSpy.Decompiler/NRefactory
 	url = https://github.com/cnsheds/NRefactory.git
+    branch = cnsheds
 [submodule "Libraries/ICSharpCode.TreeView"]
 	path = Libraries/ICSharpCode.TreeView
 	url = https://github.com/dnSpyEx/ICSharpCode.TreeView.git
