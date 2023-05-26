@@ -11,9 +11,6 @@ on:
       - released
   workflow_dispatch:
 
-env:
-  CI_REQ_DOTNET_SDK_VER: 6.0.405
-
 jobs:
   build:
     name: Build
@@ -36,23 +33,24 @@ jobs:
             build-dir: net6.0-windows\win-x64\publish
 
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v3.5.2
         with:
           submodules: true
 
       - uses: actions/setup-dotnet@v3.0.3
         with:
-          dotnet-version: ${{env.CI_REQ_DOTNET_SDK_VER}}
+          dotnet-version: 6.0.x
+          dotnet-quality: ga
 
-      - uses: microsoft/setup-msbuild@v1.1.3
+      - uses: microsoft/setup-msbuild@v1.3.1
 
       - name: Build dnSpy (${{matrix.platform}})
         run: .\build.ps1 ${{matrix.platform}}
-        
+
       - name: Create output directory
         run: New-Item -ItemType Directory -Path C:\builtfiles\dnSpy-${{matrix.platform}} -Force > $null
         continue-on-error: true
-        
+
       - name:  Copy release files for upload
         run: Copy-Item -Path dnSpy\dnSpy\bin\Release\${{matrix.build-dir}}\* -Destination C:\builtfiles\dnSpy-${{matrix.platform}} -Recurse
 

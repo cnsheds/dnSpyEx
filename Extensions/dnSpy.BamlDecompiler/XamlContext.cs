@@ -106,10 +106,10 @@ namespace dnSpy.BamlDecompiler {
 				type = TypeNameParser.ParseReflectionThrow(Module, typeRec.TypeFullName, new DummyAssemblyRefFinder(assembly));
 			}
 
-			var clrNs = type.ReflectionNamespace;
+			var name = XamlTypeName.From(type, out string clrNs);
 			var xmlNs = XmlNs.LookupXmlns(assembly, clrNs);
 
-			typeMap[id] = xamlType = new XamlType(assembly, clrNs, type.ReflectionName, GetXmlNamespace(xmlNs)) {
+			typeMap[id] = xamlType = new XamlType(assembly, clrNs, name, GetXmlNamespace(xmlNs)) {
 				ResolvedType = type
 			};
 

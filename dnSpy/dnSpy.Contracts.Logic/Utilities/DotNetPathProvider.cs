@@ -161,6 +161,23 @@ namespace dnSpy.Contracts.Utilities {
 			return fpMajorMinor ?? fpMajor;
 		}
 
+		/// <summary>
+		/// Returns the .NET runtime assembly directories on the system which exactly match the search criteria.
+		/// </summary>
+		/// <param name="version">The exact version of the .NET runtime</param>
+		/// <param name="bitness">The bitness of the .NET runtime</param>
+		/// <returns>The .NET runtime assembly directories. Empty if non where found.</returns>
+		public string[] TryFindExactRuntimePaths(Version version, int bitness) {
+			var candidates = new List<string>();
+			foreach (var frameworkPaths in netPathsShared) {
+				if (frameworkPaths.Bitness != bitness)
+					continue;
+				if (frameworkPaths.SystemVersion == version)
+					candidates.AddRange(frameworkPaths.Paths);
+			}
+			return candidates.ToArray();
+		}
+
 		static FrameworkPaths BestMinorVersion(int minor, FrameworkPaths a, FrameworkPaths b) {
 			uint da = VerDist(minor, a.Version.Minor);
 			uint db = VerDist(minor, b.Version.Minor);
@@ -498,6 +515,36 @@ namespace dnSpy.Contracts.Utilities {
 			}
 
 			return foundMatch;
+		}
+
+		internal bool TryGetClosestNetStandardCompatibleVersion(Version netStandardVersion, out Version? netCoreVersion) {
+			netCoreVersion = null;
+
+			if (!HasDotNet)
+				return false;
+
+			var version2 = new Version(2, 0, 0, 0);
+			FrameworkVersion maxNetCoreVersion;
+			if (netStandardVersion < version2)
+				maxNetCoreVersion = new FrameworkVersion(1, 1, 0, "");
+			else if (netStandardVersion == version2)
+				maxNetCoreVersion = new FrameworkVersion(2, 2, 0, "");
+			else
+				return TryGetLatestNetStandardCompatibleVersion(netStandardVersion, out netCoreVersion);
+
+			Version? max = null;
+			foreach (var info in netPathsShared) {
+				if (info.Version.CompareTo(maxNetCoreVersion) < 0 &&
+					info.IsCompatibleWithNetStandard(netStandardVersion) && (max is null || info.SystemVersion > max))
+					max = info.SystemVersion;
+			}
+
+			if (max is not null) {
+				netCoreVersion = max;
+				return true;
+			}
+
+			return false;
 		}
 	}
 }
