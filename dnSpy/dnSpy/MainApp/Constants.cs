@@ -19,7 +19,7 @@
 
 namespace dnSpy.MainApp {
 	static class Constants {
-		public const string DnSpy = "dnSpy";
+		public const string DnSpy = "XsNet";
 		// Used in filenames so must only have valid filename chars
 		public const string DnSpyFile = DnSpy;
 	}
