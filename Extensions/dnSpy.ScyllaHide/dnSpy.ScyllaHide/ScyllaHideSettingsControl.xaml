@@ -1,0 +1,9 @@
+<UserControl x:Class="dnSpy.ScyllaHide.ScyllaHideSettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:scyllaHide="clr-namespace:dnSpy.ScyllaHide">
+    <StackPanel>
+        <CheckBox Content="Enabled" IsChecked="{Binding IsEnabledOption}" />
+        <scyllaHide:SettingsPageLayout></scyllaHide:SettingsPageLayout>
+    </StackPanel>
+</UserControl>
