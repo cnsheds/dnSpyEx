@@ -50,9 +50,11 @@ namespace dnSpy.ScyllaHide {
 		}
 
 		//将要执行的函数转换为委托
-		public Delegate Invoke(String ApiName, Type t) {
+		public Delegate? Invoke(String ApiName, Type t) {
 			IntPtr api = GetProcAddress(hLib, ApiName);
-			return (Delegate)Marshal.GetDelegateForFunctionPointer(api, t);
+			if (api != IntPtr.Zero)
+				return (Delegate)Marshal.GetDelegateForFunctionPointer(api, t);
+			return null;
 		}
 
 	}

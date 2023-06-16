@@ -27,6 +27,19 @@ namespace dnSpy.ScyllaHide {
 		    main = SynchronizationContext.Current;
 			Instance = this;
 
+			if (IntPtr.Size == 4) {
+				SycllaHidePlugin = new DllInvoke("ScyllaHideDnSpyPluginx86.dll");
+			}
+			else {
+				SycllaHidePlugin = new DllInvoke("ScyllaHideDnSpyPluginx64.dll");
+			}
+			ScyllaHideInit = SycllaHidePlugin.Invoke("ScyllaHideInit", typeof(Api_ScyllaHideInit)) as Api_ScyllaHideInit;
+			if (ScyllaHideInit == null)
+				return;
+			ScyllaHideReset = SycllaHidePlugin.Invoke("ScyllaHideReset", typeof(Api_ScyllaHideReset)) as Api_ScyllaHideReset;
+			ScyllaHideDebugLoop = SycllaHidePlugin.Invoke("ScyllaHideDebugLoop", typeof(Api_ScyllaHideDebugLoop)) as Api_ScyllaHideDebugLoop;
+
+
 			dbgManager.IsRunningChanged += (sender, message) => { EventOnDbgManager("IsRuningChanged"); };
 			dbgManager.IsDebuggingChanged += (sender, message) => { EventOnDbgManager("IsDebugingChanged"); };
 			dbgManager.DebugTagsChanged += (sender, message) => { EventOnDbgManager("DebugTags " +message.Objects[0]); };
@@ -35,16 +48,6 @@ namespace dnSpy.ScyllaHide {
 			dbgManager.ProcessesChanged += (sender, message) => { EventOnDbgManager("ProcessChanged"); };
 			dbgManager.CurrentProcessChanged += (sender, message) => { EventOnDbgManager("CurrentProcessChanged"); };
 			dbgManager.Message += (sender, args) => { MessageFromDbg(dbgManager,args); };
-
-			if (IntPtr.Size == 4) {
-				SycllaHidePlugin = new DllInvoke("ScyllaHideDnSpyPluginx86.dll");
-			}
-			else {
-				SycllaHidePlugin = new DllInvoke("ScyllaHideDnSpyPluginx64.dll");
-			}
-			ScyllaHideInit = (Api_ScyllaHideInit)SycllaHidePlugin.Invoke("ScyllaHideInit", typeof(Api_ScyllaHideInit));
-			ScyllaHideReset = (Api_ScyllaHideReset)SycllaHidePlugin.Invoke("ScyllaHideReset", typeof(Api_ScyllaHideReset));
-			ScyllaHideDebugLoop = (Api_ScyllaHideDebugLoop)SycllaHidePlugin.Invoke("ScyllaHideDebugLoop", typeof(Api_ScyllaHideDebugLoop));
 		}
 
 		private void EventOnDbgManager(string text)
@@ -151,9 +154,9 @@ namespace dnSpy.ScyllaHide {
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)] 
 		public delegate void Api_ScyllaHideDebugLoop(int DebugEvent, int ProcessID, bool lpStartAddressIsNull = false, bool lpBaseOfNtDll = false);
 
-		static Api_ScyllaHideInit ScyllaHideInit;
-		static Api_ScyllaHideReset ScyllaHideReset;
-		static Api_ScyllaHideDebugLoop ScyllaHideDebugLoop;
+		static Api_ScyllaHideInit? ScyllaHideInit;
+		static Api_ScyllaHideReset? ScyllaHideReset;
+		static Api_ScyllaHideDebugLoop? ScyllaHideDebugLoop;
 
 	}
 } 
