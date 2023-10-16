@@ -35,14 +35,18 @@ namespace dnSpy.BamlDecompiler.Xaml {
 
 		public ITypeDefOrRef ResolvedMemberDeclaringType { get; set; }
 
+		public XamlPropertyKind PropertyKind { get; set; }
+
 		public XamlProperty(XamlType type, string name) {
 			DeclaringType = type;
 			PropertyName = name;
 		}
 
 		public void TryResolve() {
-			if (ResolvedMember is not null)
+			if (ResolvedMember is not null) {
+				ResolvedMemberDeclaringType ??= ResolvedMember.DeclaringType;
 				return;
+			}
 
 			(ResolvedMember, ResolvedMemberDeclaringType) = FindProperty(DeclaringType.ResolvedType, PropertyName);
 			if (ResolvedMember is not null)
