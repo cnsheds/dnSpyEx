@@ -113,8 +113,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppHostInfoGenerator", "Ext
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dnSpy.ScyllaHide", "dnSpy.ScyllaHide", "{085CD4D0-06E8-480B-A10F-429C74D93910}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dnSpy.ScyllaHide", "Extensions\dnSpy.ScyllaHide\dnSpy.ScyllaHide\dnSpy.ScyllaHide.csproj", "{7F837B21-90D3-4427-86EB-7DD929E8979C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -665,18 +663,6 @@ Global
 		{C40804E2-F748-4162-A554-658ADD6E6EDA}.Release|x64.Build.0 = Release|Any CPU
 		{C40804E2-F748-4162-A554-658ADD6E6EDA}.Release|x86.ActiveCfg = Release|Any CPU
 		{C40804E2-F748-4162-A554-658ADD6E6EDA}.Release|x86.Build.0 = Release|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Debug|x64.Build.0 = Debug|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Debug|x86.Build.0 = Debug|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Release|x64.ActiveCfg = Release|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Release|x64.Build.0 = Release|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Release|x86.ActiveCfg = Release|Any CPU
-		{7F837B21-90D3-4427-86EB-7DD929E8979C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -733,7 +719,6 @@ Global
 		{7B579A88-FA0B-46DD-8150-3CFD332C05F9} = {C6E9757D-E267-4CEF-B550-EF864373A92E}
 		{C40804E2-F748-4162-A554-658ADD6E6EDA} = {29E1907A-9C87-4F6E-961C-1C45273EFAFA}
 		{085CD4D0-06E8-480B-A10F-429C74D93910} = {01A442C1-3CE6-45A7-BE1B-9E288ADC33F3}
-		{7F837B21-90D3-4427-86EB-7DD929E8979C} = {085CD4D0-06E8-480B-A10F-429C74D93910}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73CB4820-3A98-46A7-AF32-E0939347B2AC}

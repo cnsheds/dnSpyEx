@@ -82,7 +82,7 @@ namespace dnSpy.Documents.Tabs {
 				return @ref2 ?? @ref;
 
 			// 如果是 <Module> 下的Token, 不再往上递归
-			if (def.DeclaringType.Name == "<Module>")
+			if (def.DeclaringType != null && def.DeclaringType.Name == "<Module>")
 				return def;
 
 			const int MAX = 100;
