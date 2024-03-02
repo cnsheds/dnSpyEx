@@ -1,6 +1,6 @@
 param(
 	[ValidateSet("all","netframework","net-x86","net-x64")]
-	[string]$buildtfm = 'all',
+	[string]$buildtfm = 'netframework',
 	[switch]$NoMsbuild
 	)
 $ErrorActionPreference = 'Stop'
@@ -30,9 +30,13 @@ function Build-NetFramework {
 	}
 
 	# move all files to a bin sub dir but keep the exe files
+	if (Test-Path $net_baseoutput\bin -PathType Container) {
+		Remove-Item -Path $net_baseoutput\bin -Recurse -Force
+	}
+	
 	Rename-Item $outdir bin
 	New-Item -ItemType Directory $outdir > $null
-	Move-Item $net_baseoutput\bin $outdir
+	Move-Item $net_baseoutput\bin\ $outdir
 	foreach ($filename in 'dnSpy-x86.exe', 'dnSpy-x86.exe.config', 'dnSpy-x86.pdb',
 			 'dnSpy.exe', 'dnSpy.exe.config', 'dnSpy.pdb',
 			 'dnSpy.Console.exe', 'dnSpy.Console.exe.config', 'dnSpy.Console.pdb') {
@@ -60,6 +64,9 @@ function Build-Net {
 
 	# move all files to a bin sub dir but keep the exe apphosts
 	$tmpbin = 'tmpbin'
+	if (Test-Path $net_baseoutput\$tmpbin -PathType Container) {
+		Remove-Item -Path $net_baseoutput\$tmpbin -Recurse -Force
+	}
 	Rename-Item $publishDir $tmpbin
 	New-Item -ItemType Directory $publishDir > $null
 	Move-Item $outdir\$tmpbin $publishDir
