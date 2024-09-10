@@ -106,6 +106,7 @@ namespace dnSpy.MainApp {
 			ResourceHelper.SetResourceManagerTokenCache(resourceManagerTokenCacheImpl);
 			AppDirectories.SetSettingsFilename(args.SettingsFilename);
 
+			WineFixes.Initialize();
 			AddAppContextFixes();
 			InstallExceptionHandlers();
 			InitializeComponent();
