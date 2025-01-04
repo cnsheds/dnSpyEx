@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.ComponentModel.Composition;
+using System.Composition;
 using dnSpy.Roslyn.EditorFeatures.Editor;
 using dnSpy.Roslyn.EditorFeatures.Host;
 using dnSpy.Roslyn.EditorFeatures.TextStructureNavigation;

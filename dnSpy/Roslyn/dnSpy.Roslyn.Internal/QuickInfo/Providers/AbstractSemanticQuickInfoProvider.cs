@@ -148,7 +148,7 @@ namespace dnSpy.Roslyn.Internal.QuickInfo {
 			var symbols = tokenInformation.Symbols;
 
 			// if generating quick info for an attribute, prefer bind to the class instead of the constructor
-			if (syntaxFactsService.IsAttributeName(token.Parent!)) {
+			if (syntaxFactsService.IsNameOfAttribute(token.Parent!)) {
 				symbols = symbols.OrderBy((s1, s2) =>
 					s1.Kind == s2.Kind ? 0 :
 					s1.Kind == SymbolKind.NamedType ? -1 :
@@ -346,7 +346,7 @@ namespace dnSpy.Roslyn.Internal.QuickInfo {
 				var symbol = symbols.First().OriginalDefinition;
 
 				// if generating quick info for an attribute, bind to the class instead of the constructor
-				if (syntaxFactsService.IsAttributeName(token.Parent) &&
+				if (syntaxFactsService.IsNameOfAttribute(token.Parent) &&
 					symbol.ContainingType?.IsAttribute() == true) {
 					symbol = symbol.ContainingType;
 				}

@@ -99,7 +99,7 @@ namespace dnSpy.Roslyn.Internal.SignatureHelp {
 		}
 
 		public async Task<SignatureHelpResult> GetItemsAsync(Document document, int position, SignatureHelpTriggerInfo triggerInfo, CancellationToken cancellationToken = default(CancellationToken)) {
-			var res = await ComputeItemsAsync(signatureHelpProviders, position, triggerInfo.ToSignatureHelpTriggerInfo(), SignatureHelpOptions.Default, document, cancellationToken).ConfigureAwait(false);
+			var res = await ComputeItemsAsync(signatureHelpProviders, position, triggerInfo.ToSignatureHelpTriggerInfo(), MemberDisplayOptions.Default, document, cancellationToken).ConfigureAwait(false);
 			return GetSignatureHelpResult(res, document);
 		}
 
