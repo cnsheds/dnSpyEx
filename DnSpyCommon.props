@@ -46,19 +46,20 @@
 
     <!-- Update app.config whenever some of these versions change (eg. dnlib version) -->
     <DiaSymReaderVersion>1.7.0</DiaSymReaderVersion>
-    <DnlibVersion>4.4.0</DnlibVersion>
+    <DnlibVersion>4.5.0</DnlibVersion>
     <IcedVersion>1.21.0</IcedVersion>
     <MSBuildNuGetVersion>17.1.0</MSBuildNuGetVersion>
     <MSDiagRuntimeVersion>1.1.142101</MSDiagRuntimeVersion>
-    <MSVSCompositionVersion>17.12.18</MSVSCompositionVersion>
+    <MSVSCompositionVersion>17.13.41</MSVSCompositionVersion>
     <MSVSIntellisenseVersion>15.5.27130</MSVSIntellisenseVersion>
     <MSVSTextVersion>15.5.27130</MSVSTextVersion>
-    <NewtonsoftJsonVersion>13.0.3</NewtonsoftJsonVersion>
+    <NewtonsoftJsonVersion>13.0.4</NewtonsoftJsonVersion>
     <OokiiDialogsWpfVersion>5.0.1</OokiiDialogsWpfVersion>
-    <RoslynVersion>4.12.0</RoslynVersion>
-    <SCCompositionVersion>9.0.0</SCCompositionVersion>
-    <NuGetVersion>6.12.1</NuGetVersion>
-    <DbgShimVersion>9.0.553101</DbgShimVersion>
+    <RoslynVersion>4.14.0</RoslynVersion>
+    <SCCompositionVersion>9.0.9</SCCompositionVersion>
+    <NuGetVersion>6.14.0</NuGetVersion>
+    <DbgShimVersion>9.0.621003</DbgShimVersion>
+    <SCImmutableVersion>9.0.9</SCImmutableVersion>
   </PropertyGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)Build\ConvertToNetstandardReferences\ConvertToNetstandardReferences.tasks" Condition=" '$(IsDotNet)' == 'true' " />
